@@ -1,11 +1,18 @@
 <template>
-    <Hero />
-    <Banner />
-    <Portfolio />
+    <HeroSection />
+    <AboutMeSection />
+    <BannerSection />
+    <PortfolioSection />
+    <SkillsSection />
+    <ContactSection />
+    <Contact />
 </template>
 
 <script setup lang="ts">
-import Hero from '@/components/Hero.vue';
-import Banner from '@/components/Banner.vue';
-import Portfolio from '@/components/Portfolio.vue';
+import HeroSection from '@/components/HeroSection.vue';
+import BannerSection from '@/components/BannerSection.vue';
+import PortfolioSection from '@/components/PortfolioSection.vue';
+import SkillsSection from '@/components/SkillsSection.vue';
+import ContactSection from '@/components/ContactSection.vue';
+import AboutMeSection from '@/components/AboutMeSection.vue';
 </script>

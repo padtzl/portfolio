@@ -1,22 +1,25 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import StyleGuide from '@/views/StyleGuide.vue';
-import Home from '@/views/Home.vue';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        name: 'Home',
-        component: Home,
+        name: 'home',
+        component: () => import('@/views/Home.vue'),
+    },
+    {
+        path: '/imprint',
+        name: 'Impressum',
+        component: () => import('@/views/Imprint.vue'),
     },
     {
         path: '/style-guide',
-        name: 'StyleGuide',
-        component: StyleGuide,
+        name: 'Style Guide',
+        component: () => import('@/views/StyleGuide.vue'),
     },
 ];
 
 const router = createRouter({
-    history: createWebHistory(process.env.BASE_URL),
+    history: createWebHistory(import.meta.env.BASE_URL),
     routes,
 });
 
