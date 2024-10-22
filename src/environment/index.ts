@@ -1,5 +1,8 @@
 const env = import.meta.env;
 
 const environment = env.MODE.toLowerCase();
+const { API_URL } = env;
 
-export { environment, APP_URL };
+console.log(env);
+
+export { environment, API_URL };
