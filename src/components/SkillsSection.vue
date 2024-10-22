@@ -15,7 +15,7 @@
                     <span
                         v-for="(skill, index) in skills"
                         :key="index"
-                        class="bg-darkSecondary text-light py-2 px-4 rounded-full text-sm font-semibold hover:bg-accent"
+                        class="bg-darkSecondary text-light py-2 px-4 rounded-full text-sm font-ptsans font-semibold hover:bg-accent"
                     >
                         {{ skill.name }}
                     </span>
@@ -40,6 +40,7 @@ const skillsContent = ref<{ title: string; copytext: string }>({
 const fetchSkills = async () => {
     try {
         const response = await getSkills();
+        console.log(response);
         skills.value = response.data.map((skill: any) => ({
             name: skill.title.rendered,
         }));
@@ -71,5 +72,6 @@ onMounted(() => {
 span {
     transition: background-color 0.2s ease;
     cursor: default;
+    letter-spacing: 0.48px;
 }
 </style>

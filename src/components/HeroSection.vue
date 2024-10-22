@@ -2,7 +2,7 @@
     <section id="hero" class="py-0">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <div class="md:w-1/3 ps text-light">
-                <strong v-if="heroData.subtitle" class="text-3xl font-ptsans font-semibold">
+                <strong v-if="heroData.subtitle" class="text-2xl font-ptsans font-semibold">
                     {{ heroData.subtitle }}
                 </strong>
                 <h1 class="hero mb-8">{{ heroData.title }}</h1>
