@@ -1,25 +1,22 @@
 <template>
     <section id="hero" class="py-0">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="md:w-1/3 ps text-white">
-                <strong v-if="heroData.subtitle" class="text-2xl font-ptsans font-medium mb-4">
+            <div class="md:w-1/3 ps text-light">
+                <strong v-if="heroData.subtitle" class="text-3xl font-ptsans font-semibold">
                     {{ heroData.subtitle }}
                 </strong>
-                <h1 class="text-8xl font-roboto font-bold text-uppercase mb-6">{{ heroData.title }}</h1>
-                <div class="text-md font-ptsans mb-12" v-html="heroData.copy"></div>
+                <h1 class="hero mb-8">{{ heroData.title }}</h1>
+                <div class="rich mb-12" v-html="heroData.copy"></div>
 
                 <a
                     :href="heroData.cta.url"
-                    class="bg-light text-accent font-bold mt-4 px-8 py-3 rounded-full hover:bg-cmykDarkGray"
+                    class="btn bg-light text-primary px-8 py-3 rounded-full hover:bg-accent hover:text-light"
                 >
                     {{ heroData.cta.title }}
                 </a>
             </div>
             <div class="md:w-1/2 mt-20">
-                <img
-                    :src="heroData.image ? heroData.image.url : '/assets/images/profile-new.png'"
-                    alt="Profile Picture"
-                />
+                <img v-if="heroData.image" :src="heroData.image.url" alt="Profile Picture" />
             </div>
         </div>
     </section>
@@ -29,7 +26,6 @@
 import { defineComponent, ref, onMounted } from 'vue';
 import { getHeroContent } from '@/service/apiService';
 import { loadMediaById } from '@/utils/mediaLoader';
-import PrimaryButton from './button/PrimaryButton.vue';
 
 export default defineComponent({
     name: 'HeroSection',
@@ -44,12 +40,10 @@ export default defineComponent({
 
         const fetchHeroData = async () => {
             try {
-                // Replace 'component' with the correct custom post type slug
                 const response = await getHeroContent();
-                const heroPost = response.data[0].acf.type[0]; // Assuming the first result is the "Hero" post
-                console.log(heroPost);
+                const heroPost = response.data[0].acf.type[0];
 
-                const mediaId = heroPost.image; // Assume ACF returns image ID
+                const mediaId = heroPost.image; // ACF returns image ID
                 const mediaDetails = await loadMediaById(mediaId);
                 // Extract custom fields (ACF) from the post
                 heroData.value = {
@@ -62,10 +56,6 @@ export default defineComponent({
             } catch (error) {
                 console.error('Error fetching Hero data:', error);
             }
-        };
-
-        const handleClick = () => {
-            console.log('click');
         };
 
         onMounted(() => {
@@ -84,9 +74,6 @@ export default defineComponent({
     background-image: url('../assets/images/bg-hero.png');
     background-position: center;
     background-repeat: no-repeat;
-}
-h1 {
-    letter-spacing: 4.4px;
-    text-transform: uppercase;
+    background-size: cover;
 }
 </style>

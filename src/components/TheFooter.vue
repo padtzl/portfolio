@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-cmykDarkGray text-white py-8">
+    <footer class="bg-zinc-900 text-white py-8">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
             <!-- Left Section: Company Info -->
             <div class="mb-6 md:mb-0 text-center md:text-left">

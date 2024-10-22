@@ -11,15 +11,14 @@ module.exports = {
                 '2xl': '1440px', // Add a custom breakpoint for 1440px
             },
             colors: {
-                cmykBlue: 'rgb(0, 90, 132)', // C=85; M=54; Y=45; K=29
-                cmykDarkGray: 'rgb(65, 65, 66)', // Darker variant for accents
                 primary: '#34324a',
+                secondary: '#444267',
                 light: '#f4f4f9',
                 accent: '#ab47bc',
-                'accent-2': '#78c6a3',
+                highlight: '#78c6a3',
                 dark: '#292d3e',
-                'dark-secondary': '202331',
-                'light-gray': '#e0e0e0',
+                darkSecondary: '#202331',
+                lightGray: '#e0e0e0',
             },
             fontFamily: {
                 roboto: ['Roboto Slab', 'serif'],
