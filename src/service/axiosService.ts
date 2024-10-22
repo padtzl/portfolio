@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { API_URL } from '@/environment';
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-    baseURL: 'https://padietzel.de/wp-json/wp/v2/',
+    baseURL: 'https://padietzel.de/wp-json/',
     timeout: 10000,
     headers: {
         'Content-Type': 'application/json',

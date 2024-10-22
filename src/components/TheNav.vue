@@ -3,7 +3,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="logo">
                 <a href="/">
-                    <img :src="require('@/assets/logo/logo.png')" alt="Logo" class="h-16" />
+                    <img src="@/assets/logo/logo.png" alt="Logo" class="h-16" />
                 </a>
             </div>
             <nav>
