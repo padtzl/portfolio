@@ -2,6 +2,7 @@ import axiosInstance from '@/service/axiosService';
 
 const wpApi = '/wp/v2';
 const acfApi = 'acf/v3';
+const cf7Api = 'contact-form-7/v1/contact-forms';
 
 export const getHeroContent = async () => {
     return await axiosInstance.get(`${wpApi}/components?slug=hero`);
@@ -23,6 +24,10 @@ export const getReferences = async () => {
     return await axiosInstance.get(`${wpApi}/referenz`);
 };
 
+export const getProjects = async () => {
+    return await axiosInstance.get(`${wpApi}/projects`);
+};
+
 export const getSkills = async () => {
     return await axiosInstance.get(`${wpApi}/skill`);
 };
@@ -33,4 +38,8 @@ export const getMediaById = async (mediaId: number) => {
 
 export const getSocialLinks = async () => {
     return await axiosInstance.get(`/options/social-links`);
+};
+
+export const postFormSubmit = async (formId: number, data: any) => {
+    return await axiosInstance.post(`${cf7Api}/${formId}/feedback`, data);
 };
