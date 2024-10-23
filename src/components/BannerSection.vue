@@ -1,15 +1,11 @@
 <template>
-    <section id="banner" class="py-12 bg-white">
-        <div class="container mx-auto flex flex-col justify-center items-center">
+    <section id="banner" class="small bg-white">
+        <div class="container flex flex-col justify-center items-center">
             <div class="text-primary">
                 <h2 class="alt mb-4">Unternehmen, die auf mich setzen</h2>
             </div>
-            <div class="flex justify-center items-center">
-                <div
-                    v-for="(logo, index) in logos"
-                    :key="index"
-                    class="p-4 md:w-1/5 sm:w-1/2 w-full flex justify-center"
-                >
+            <div class="flex flex-wrap md:flex-nowrap justify-center items-center">
+                <div v-for="(logo, index) in logos" :key="index" class="p-4 md:w-1/5 w-1/4 flex justify-center">
                     <img :src="logo.url" :alt="logo.alt" class="h-20 w-auto" />
                 </div>
             </div>
@@ -62,6 +58,9 @@ onMounted(() => {
 </script>
 
 <style scoped>
+h2 {
+    color: #2b2a3e;
+}
 img {
     height: auto;
     max-height: 3rem;

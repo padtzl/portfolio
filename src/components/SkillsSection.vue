@@ -1,16 +1,13 @@
 <template>
-    <section id="skills" class="py-16 bg-light">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <!-- Left Side: Headline and Text -->
-            <div class="md:w-1/2 text-center md:text-left p-6">
-                <h2 class="mb-6">{{ skillsContent.title }}</h2>
-                <p class="mb-12 pr-20">
+    <section id="skills" class="bg-light">
+        <div class="container flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pl-0 md:p-8">
+                <h2>{{ skillsContent.title }}</h2>
+                <p class="mb-8 md:mb-12 lg:pr-20 sm:pr-10">
                     {{ skillsContent.copytext }}
                 </p>
             </div>
-
-            <!-- Right Side: Skills Tags -->
-            <div class="md:w-1/2 p-6">
+            <div class="md:w-1/2 md:pr-0 md:pl-4 md:py-8">
                 <div class="flex flex-wrap gap-4 justify-center md:justify-start">
                     <span
                         v-for="(skill, index) in skills"

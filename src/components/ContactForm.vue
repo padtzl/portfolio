@@ -1,12 +1,12 @@
 <template>
-    <form @submit.prevent="submitForm" class="bg-white p-8 rounded-lg shadow-lg text-gray-800">
+    <form @submit.prevent="submitForm" class="bg-light p-8 rounded-lg shadow-lg text-primary">
         <div class="mb-4">
             <label for="name" class="block font-semibold mb-2">Name</label>
             <input
                 type="text"
                 id="name"
-                v-model="form.name"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cmykBlue"
+                v-model="formData.name"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Dein Name"
             />
         </div>
@@ -15,22 +15,32 @@
             <input
                 type="email"
                 id="email"
-                v-model="form.email"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cmykBlue"
+                v-model="formData.email"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Deine Email"
+            />
+        </div>
+        <div class="mb-4">
+            <label for="name" class="block font-semibold mb-2">Betreff</label>
+            <input
+                type="text"
+                id="subject"
+                v-model="formData.subject"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
+                placeholder="Dein Betreff"
             />
         </div>
         <div class="mb-4">
             <label for="message" class="block font-semibold mb-2">Nachricht</label>
             <textarea
                 id="message"
-                v-model="form.message"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cmykBlue"
+                v-model="formData.message"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                 placeholder="Deine Nachricht"
             ></textarea>
         </div>
-        <button type="submit" class="bg-cmykBlue text-white px-6 py-3 rounded hover:bg-cmykDarkGray w-full">
-            Senden
+        <button type="submit" class="btn bg-dark text-white mt-6 px-8 py-3 rounded-full hover:bg-accent">
+            Abschicken
         </button>
 
         <!-- Success or Error Message -->
@@ -46,41 +56,34 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import axios from 'axios';
+import { ref } from 'vue';
+import { postFormSubmit } from '@/service/apiService';
 
-// Reactive state for the form
-const form = reactive({
+interface FormData {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+}
+
+const formData = ref<FormData>({
     name: '',
     email: '',
+    subject: '',
     message: '',
 });
 
-// Submission status (to show success or error message)
 const submissionStatus = ref<string | null>(null);
 
-// Function to submit the form data to Contact Form 7 via API
 const submitForm = async () => {
     try {
-        const response = await axios.post(
-            'https://your-wordpress-site.com/wp-json/contact-form-7/v1/contact-forms/123/feedback',
-            {
-                'your-name': form.name,
-                'your-email': form.email,
-                'your-message': form.message,
-            },
-            {
-                headers: { 'Content-Type': 'application/json' },
-            }
-        );
+        const response = await postFormSubmit(129, formData.value);
+        console.log(response);
 
         // Handle successful submission
         if (response.data.status === 'mail_sent') {
             submissionStatus.value = 'success';
-            // Reset form
-            form.name = '';
-            form.email = '';
-            form.message = '';
+            resetForm();
         } else {
             submissionStatus.value = 'error';
         }
@@ -88,6 +91,13 @@ const submitForm = async () => {
         console.error('Error submitting form:', error);
         submissionStatus.value = 'error';
     }
+};
+
+const resetForm = () => {
+    formData.value.name = '';
+    formData.value.email = '';
+    formData.value.subject = '';
+    formData.value.message = '';
 };
 </script>
 

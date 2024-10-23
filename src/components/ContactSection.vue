@@ -1,14 +1,12 @@
 <template>
     <section id="contact" class="py-16 bg-primary text-white">
-        <div class="container mx-auto flex flex-col md:flex-row items-center">
-            <div class="md:w-1/2 text-center md:text-left p-6">
-                <div class="max-w-md">
-                    <strong class="text-xl text-accent">{{ contactSubtitle }}</strong>
-                    <h2 class="mb-6">{{ contactTitle }}</h2>
-                    <p class="pr-4 mb-6">{{ contactDescription }}</p>
-                </div>
+        <div class="container flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-20">
+                <strong class="text-xl font-ptsans text-accent">{{ contactSubtitle }}</strong>
+                <h2>{{ contactTitle }}</h2>
+                <p class="mb-6">{{ contactDescription }}</p>
             </div>
-            <div class="md:w-1/2 p-6">
+            <div class="w-full md:w-1/2 md:pr-0 md:pl-8 md:py-6">
                 <ContactForm />
             </div>
         </div>

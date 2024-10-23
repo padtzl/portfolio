@@ -23,6 +23,7 @@
         @apply text-4xl;
         line-height: 1.3;
         letter-spacing: 0.48px;
+        @apply mb-4 md:mb-6;
     }
 
     h2.alt {
@@ -32,7 +33,16 @@
         @apply normal-case;
     }
 
-    a.btn {
+    h3 {
+        @apply font-roboto;
+        @apply font-semibold;
+        @apply text-2xl;
+        line-height: 1.4;
+        letter-spacing: 0.48px;
+    }
+
+    a.btn,
+    button.btn {
         @apply font-roboto;
         @apply text-lg;
         @apply font-bold;
@@ -53,5 +63,51 @@
     em {
         @apply font-ptsans;
         @apply text-lg;
+    }
+
+    nav.main {
+        @apply absolute top-20 left-0 w-full bg-light z-10  shadow-md py-6;
+        @apply md:relative md:top-0 md:w-auto md:bg-transparent md:flex md:z-auto md:shadow-none md:py-0;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease, transform 0.3s ease; /* Add transition for smooth appearance */
+    }
+
+    nav.main.open {
+        display: block;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @media (min-width: 768px) {
+        nav.main {
+            display: flex !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    nav.main.open {
+        display: block;
+    }
+
+    nav.main ul {
+        @apply flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6 font-bold text-center md:text-left;
+    }
+
+    nav.main ul li a {
+        @apply hover:text-accent;
+    }
+
+    section:not(#hero, .small) {
+        @apply py-12 md:py-16;
+    }
+
+    section.small {
+        @apply py-10 md:py-12;
+    }
+
+    .shadow-card {
+        box-shadow: 0 4px 12px rgba(41, 45, 62, 0.1);
     }
 }

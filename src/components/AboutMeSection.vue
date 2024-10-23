@@ -1,5 +1,5 @@
 <template>
-    <section id="about" class="py-16 bg-light">
+    <section id="about" class="bg-light">
         <div class="container mx-auto max-w-screen-lg">
             <h2 class="mb-6">{{ aboutContent.title }}</h2>
             <div class="mb-12" v-html="aboutContent.copy"></div>

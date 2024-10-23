@@ -1,8 +1,8 @@
 <template>
     <footer class="bg-zinc-900 text-white py-8">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div class="container flex flex-col md:flex-row justify-between items-center">
             <!-- Left Section: Company Info -->
-            <div class="mb-6 md:mb-0 text-center md:text-left">
+            <div class="mb-8 md:mb-0">
                 <div class="logo">
                     <a href="/">
                         <img src="@/assets/logo/logo-white.png" alt="Logo" class="h-16" />
@@ -24,7 +24,7 @@
                     target="_blank"
                     class="hover:text-gray-400"
                 >
-                    <FontAwesomeIcon :icon="['fab', icon]" class="h-6 w-6" />
+                    <FontAwesomeIcon :icon="['fab', icon]" class="h-8 w-8" />
                 </a>
             </div>
         </div>
@@ -33,7 +33,7 @@
         <div class="md:mb-0 flex flex-col items-center mt-8">
             <nav>
                 <ul class="flex space-x-6 text-accent">
-                    <li><a href="#about" class="hover:underline">Impressum</a></li>
+                    <li><a href="#imprint" class="hover:underline">Impressum</a></li>
                     <li><a href="#projects" class="hover:underline">AGB</a></li>
                 </ul>
             </nav>
