@@ -1,5 +1,4 @@
 import { getMediaById } from '@/service/apiService';
-import axiosInstance from '@/service/axiosService';
 
 /**
  * Fetch media details by ID from WordPress API
@@ -11,7 +10,7 @@ export const loadMediaById = async (mediaId: number) => {
         const response = await getMediaById(mediaId);
         return {
             url: response.data.source_url,
-            alt: response.data.alt_text || '', // Provide default empty alt text if not available
+            alt: response.data.alt_text || '',
         };
     } catch (error) {
         console.error(`Failed to load media with ID ${mediaId}:`, error);
