@@ -8,10 +8,9 @@
                         <img src="@/assets/logo/logo-white.png" alt="Logo" class="h-16" />
                     </a>
                 </div>
-                <div class="mt-6">
-                    <strong class="mb-4">Philip-Alexander Dietzel</strong>
-                    <p class="mt-4">Software Engineer | Full-Stack Development</p>
-                    <p>Based in Hamburg</p>
+                <div class="font-ptsans mt-6">
+                    <p class="font-light text-base mt-2">Software Engineering | Full-Stack Development</p>
+                    <p class="font-light text-base mt-1">Based in Hamburg - Remote worldwide</p>
                 </div>
             </div>
 
@@ -33,7 +32,7 @@
         <div class="md:mb-0 flex flex-col items-center mt-8">
             <nav>
                 <ul class="flex space-x-6 text-accent">
-                    <li><a href="#imprint" class="hover:underline">Impressum</a></li>
+                    <li><a href="/impressum" class="hover:underline">Impressum</a></li>
                     <li><a href="#projects" class="hover:underline">AGB</a></li>
                 </ul>
             </nav>
@@ -55,31 +54,27 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faGithub, faLinkedin, faXing } from '@fortawesome/free-brands-svg-icons';
 import { getSocialLinks } from '@/service/apiService';
 
-// Add icons to the library
 library.add(faGithub, faLinkedin, faXing);
 
-// Reactive object to hold social links
 const socialLinks = ref<{ github: string; linkedin: string; xing: string }>({
     github: '',
     linkedin: '',
     xing: '',
 });
 
-// Simulated API call to fetch social links from ACF options page
+// fetch social links from ACF options page
 const fetchSocialLinks = async () => {
     try {
         const response = await getSocialLinks();
-        console.log(response);
         const { data } = response;
-        socialLinks.value.github = data.github || 'https://github.com';
-        socialLinks.value.linkedin = data.linkedin || 'https://linkedin.com';
-        socialLinks.value.xing = data.xing || 'https://xing.com';
+        socialLinks.value.github = data.github;
+        socialLinks.value.linkedin = data.linkedin;
+        socialLinks.value.xing = data.xing;
     } catch (error) {
         console.error('Error fetching social links:', error);
     }
 };
 
-// Fetch social links on component mount
 onMounted(() => {
     fetchSocialLinks();
 });

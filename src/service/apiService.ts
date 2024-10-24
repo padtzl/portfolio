@@ -51,3 +51,7 @@ export const getSocialLinks = async () => {
 export const postFormSubmit = async (formId: number, data: any) => {
     return await axiosInstance.post(`${formAPI}/${formId}`, data);
 };
+
+export const getImprint = async () => {
+    return await axiosInstance.get(`${wpApi}/pages?slug=impressum`);
+};

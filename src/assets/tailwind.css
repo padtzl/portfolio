@@ -4,11 +4,15 @@
 
 @layer base {
     h1 {
+        @apply text-8xl;
         @apply font-roboto;
         @apply font-bold;
-        @apply text-8xl;
         line-height: 1.2;
         letter-spacing: -0.5px;
+    }
+
+    h1.page-title {
+        @apply text-6xl;
     }
 
     h1.hero {
@@ -109,5 +113,15 @@
 
     .shadow-card {
         box-shadow: 0 4px 12px rgba(41, 45, 62, 0.1);
+    }
+    div.rich h1 {
+    }
+
+    div.rich h2 {
+        margin-top: 2rem;
+    }
+    div.rich h3 {
+        margin-top: 2rem;
+        margin-bottom: 1.25rem;
     }
 }

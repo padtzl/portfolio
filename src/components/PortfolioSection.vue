@@ -47,6 +47,8 @@ const fetchProjects = async () => {
                 title: project.title.rendered,
                 name: project.acf.name,
                 description: project.acf.description,
+                tech: project.acf.tech,
+                role: project.acf.role,
                 image: project.acf.image,
                 link: project.link,
             };

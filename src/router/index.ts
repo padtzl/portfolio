@@ -7,7 +7,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/Home.vue'),
     },
     {
-        path: '/imprint',
+        path: '/impressum',
         name: 'Impressum',
         component: () => import('@/views/Imprint.vue'),
     },

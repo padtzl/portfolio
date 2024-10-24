@@ -38,7 +38,7 @@
             <nav :class="isMenuOpen ? 'open' : ''" class="main transition-all duration-300 ease-in-out">
                 <ul>
                     <li><a href="#about">Über Mich</a></li>
-                    <li><a href="#projects">Projekte</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
                     <li><a href="#contact">Kontakt</a></li>
                 </ul>
             </nav>
