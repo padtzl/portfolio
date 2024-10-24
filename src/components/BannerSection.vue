@@ -2,7 +2,7 @@
     <section id="banner" class="small bg-white">
         <div class="container flex flex-col justify-center items-center">
             <div class="text-primary">
-                <h2 class="alt mb-4">Unternehmen, die auf mich setzen</h2>
+                <h2 class="alt mb-4">{{ title }}</h2>
             </div>
             <div class="flex flex-wrap md:flex-nowrap justify-center items-center">
                 <div v-for="(logo, index) in logos" :key="index" class="p-4 md:w-1/5 w-1/4 flex justify-center">
@@ -15,9 +15,21 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { getMediaById, getReferences } from '@/service/apiService';
+import { getBannerContent, getMediaById, getReferences } from '@/service/apiService';
 
+const title = ref<string>('');
 const logos = ref<Array<{ url: string; alt: string }>>([]);
+
+// Fetch the content from the API
+const fetchBannerTitle = async () => {
+    try {
+        const response = await getBannerContent();
+        console.log(response);
+        title.value = response.data[0].acf.type[0].title;
+    } catch (error) {
+        console.error('Error fetching portfolio content:', error);
+    }
+};
 
 // Fetch media details for each logo by media ID
 const fetchMediaDetails = async (mediaId: number) => {
@@ -53,6 +65,7 @@ const fetchLogos = async () => {
 };
 
 onMounted(() => {
+    fetchBannerTitle();
     fetchLogos();
 });
 </script>
