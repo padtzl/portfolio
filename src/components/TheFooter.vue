@@ -33,7 +33,6 @@
             <nav>
                 <ul class="flex space-x-6 text-accent">
                     <li><a href="/impressum" class="hover:underline">Impressum</a></li>
-                    <li><a href="#projects" class="hover:underline">AGB</a></li>
                 </ul>
             </nav>
         </div>
