@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import TheFooter from './components/TheFooter.vue';
+import { defineAsyncComponent } from 'vue';
 import TheNav from './components/TheNav.vue';
+
+const TheFooter = defineAsyncComponent(() => import('./components/TheFooter.vue'));
 </script>
 
 <template>

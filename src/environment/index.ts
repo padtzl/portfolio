@@ -1,6 +1,5 @@
 const env = import.meta.env;
 
-const environment = env.MODE.toLowerCase();
-const { VITE_API_URL: API_URL } = env;
+const { VITE_API_URL: API_URL, VITE_PAGE_TITLE: PAGE_TITLE, VITE_DESCRIPTION: META_DESCRIPTION } = env;
 
-export { environment, API_URL };
+export { API_URL, PAGE_TITLE, META_DESCRIPTION };

@@ -8,10 +8,12 @@
 </template>
 
 <script setup lang="ts">
+import { defineAsyncComponent } from 'vue';
 import HeroSection from '@/components/HeroSection.vue';
-import BannerSection from '@/components/BannerSection.vue';
-import SkillsSection from '@/components/SkillsSection.vue';
-import ContactSection from '@/components/ContactSection.vue';
 import AboutMeSection from '@/components/AboutMeSection.vue';
-import PortfolioSection from '@/components/PortfolioSection.vue';
+
+const BannerSection = defineAsyncComponent(() => import('@/components/BannerSection.vue'));
+const SkillsSection = defineAsyncComponent(() => import('@/components/SkillsSection.vue'));
+const PortfolioSection = defineAsyncComponent(() => import('@/components/PortfolioSection.vue'));
+const ContactSection = defineAsyncComponent(() => import('@/components/ContactSection.vue'));
 </script>
