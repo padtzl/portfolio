@@ -1,45 +1,59 @@
 <template>
-    <form @submit.prevent="submitForm" class="bg-light p-8 rounded-lg shadow-lg text-primary">
-        <div class="mb-4">
-            <label for="name" class="block font-semibold mb-2">Name</label>
-            <input
-                type="text"
-                id="name"
-                v-model="formData.name"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Dein Name"
-            />
+    <form
+        @submit.prevent="submitForm"
+        netlify
+        name="contact"
+        method="POST"
+        class="bg-light p-8 rounded-md shadow-card text-primary font-ptsans"
+    >
+        <h3 class="text-2xl mb-6 text-dark">{{ props.title }}</h3>
+
+        <!-- Hidden Netlify form name input -->
+        <input type="hidden" name="form-name" value="contact" />
+
+        <div class="space-y-4">
+            <div>
+                <input
+                    type="text"
+                    name="name"
+                    v-model="formData.name"
+                    class="w-full p-3 border-b border-dark focus:outline-none focus:border-accent bg-light placeholder:text-primary"
+                    placeholder="Dein Name"
+                    required
+                />
+            </div>
+            <div>
+                <input
+                    type="email"
+                    name="email"
+                    v-model="formData.email"
+                    class="w-full p-3 border-b border-primary focus:outline-none focus:border-accent bg-light placeholder:text-primary"
+                    placeholder="Deine Email"
+                    required
+                />
+            </div>
+            <div>
+                <input
+                    type="text"
+                    name="subject"
+                    v-model="formData.subject"
+                    class="w-full p-3 border-b focus:outline-none focus:border-accent bg-light placeholder:text-primary"
+                    placeholder="Dein Betreff"
+                    required
+                />
+            </div>
+            <div>
+                <textarea
+                    name="message"
+                    v-model="formData.message"
+                    class="w-full p-3 border-b focus:outline-none focus:border-accent bg-light placeholder:text-primary"
+                    placeholder="Deine Nachricht"
+                    required
+                ></textarea>
+            </div>
         </div>
-        <div class="mb-4">
-            <label for="email" class="block font-semibold mb-2">Email</label>
-            <input
-                type="email"
-                id="email"
-                v-model="formData.email"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Deine Email"
-            />
-        </div>
-        <div class="mb-4">
-            <label for="name" class="block font-semibold mb-2">Betreff</label>
-            <input
-                type="text"
-                id="subject"
-                v-model="formData.subject"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Dein Betreff"
-            />
-        </div>
-        <div class="mb-4">
-            <label for="message" class="block font-semibold mb-2">Nachricht</label>
-            <textarea
-                id="message"
-                v-model="formData.message"
-                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
-                placeholder="Deine Nachricht"
-            ></textarea>
-        </div>
-        <button type="submit" class="btn bg-dark text-white mt-6 px-8 py-3 rounded-full hover:bg-accent">
+
+        <button type="submit" class="btn bg-dark text-white mt-10 px-8 py-2 rounded-full hover:bg-accent">
             Abschicken
         </button>
 
@@ -57,7 +71,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { postFormSubmit } from '@/service/apiService';
+
+interface FormProps {
+    title: string;
+}
 
 interface FormData {
     name: string;
@@ -65,6 +82,8 @@ interface FormData {
     subject: string;
     message: string;
 }
+
+const props = defineProps<FormProps>();
 
 const formData = ref<FormData>({
     name: '',
@@ -77,16 +96,8 @@ const submissionStatus = ref<string | null>(null);
 
 const submitForm = async () => {
     try {
-        const response = await postFormSubmit(129, formData.value);
-        console.log(response);
-
-        // Handle successful submission
-        if (response.data.status === 'mail_sent') {
-            submissionStatus.value = 'success';
-            resetForm();
-        } else {
-            submissionStatus.value = 'error';
-        }
+        submissionStatus.value = 'success';
+        resetForm();
     } catch (error) {
         console.error('Error submitting form:', error);
         submissionStatus.value = 'error';
@@ -102,6 +113,14 @@ const resetForm = () => {
 </script>
 
 <style scoped>
+input,
+textarea {
+    border: none;
+    border-bottom: 2px solid;
+    background-color: inherit;
+    transition: border-color 0.4s ease;
+}
+
 textarea {
     min-height: 150px;
 }
