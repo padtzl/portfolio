@@ -7,7 +7,7 @@
                 <p class="mb-6">{{ contactDescription }}</p>
             </div>
             <div class="w-full md:w-1/2 md:pr-0 md:pl-8 md:py-6">
-                <ContactForm />
+                <ContactForm v-if="formTitle" :title="formTitle" />
             </div>
         </div>
     </section>
@@ -21,6 +21,7 @@ import ContactForm from './ContactForm.vue';
 const contactSubtitle = ref('');
 const contactTitle = ref('');
 const contactDescription = ref('');
+const formTitle = ref('');
 
 // Fetch contact section content dynamically
 const fetchContactSection = async () => {
@@ -29,6 +30,7 @@ const fetchContactSection = async () => {
         contactSubtitle.value = response.data[0].acf.type[0].subtitle;
         contactTitle.value = response.data[0].acf.type[0].title;
         contactDescription.value = response.data[0].acf.type[0].copytext;
+        formTitle.value = response.data[0].acf.type[0].form_title;
     } catch (error) {
         console.error('Error fetching contact section:', error);
     }
