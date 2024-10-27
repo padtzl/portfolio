@@ -1,7 +1,7 @@
 <template>
     <form
         @submit.prevent="submitForm"
-        netlify
+        data-netlify="true"
         name="contact"
         method="POST"
         class="bg-light p-8 rounded-md shadow-card text-primary font-ptsans"
@@ -95,9 +95,25 @@ const formData = ref<FormData>({
 const submissionStatus = ref<string | null>(null);
 
 const submitForm = async () => {
+    const formDataToSubmit = new FormData();
+    formDataToSubmit.append('form-name', 'contact');
+    formDataToSubmit.append('name', formData.value.name);
+    formDataToSubmit.append('email', formData.value.email);
+    formDataToSubmit.append('subject', formData.value.subject);
+    formDataToSubmit.append('message', formData.value.message);
+
     try {
-        submissionStatus.value = 'success';
-        resetForm();
+        const response = await fetch('/', {
+            method: 'POST',
+            body: formDataToSubmit,
+        });
+
+        if (response.ok) {
+            submissionStatus.value = 'success';
+            resetForm();
+        } else {
+            throw new Error('Network response was not ok');
+        }
     } catch (error) {
         console.error('Error submitting form:', error);
         submissionStatus.value = 'error';
