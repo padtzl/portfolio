@@ -24,7 +24,7 @@ const logos = ref<Array<{ url: string; alt: string }>>([]);
 const fetchBannerTitle = async () => {
     try {
         const response = await getBannerContent();
-        console.log(response);
+
         title.value = response.data[0].acf.type[0].title;
     } catch (error) {
         console.error('Error fetching portfolio content:', error);

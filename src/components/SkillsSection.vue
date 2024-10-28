@@ -37,7 +37,7 @@ const skillsContent = ref<{ title: string; copytext: string }>({
 const fetchSkills = async () => {
     try {
         const response = await getSkills();
-        console.log(response);
+
         skills.value = response.data.map((skill: any) => ({
             name: skill.title.rendered,
         }));

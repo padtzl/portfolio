@@ -30,7 +30,7 @@ const projects = ref<Array<{ title: string; name: string; description: string; i
 const fetchPortfolioContent = async () => {
     try {
         const response = await getPortfolioContent();
-        console.log(response);
+
         portfolioTitle.value = response.data[0].acf.type[0].title || 'Portfolio';
         portfolioSubtitle.value = response.data[0].acf.type[0].subtitle || 'Meine Projekte';
     } catch (error) {
