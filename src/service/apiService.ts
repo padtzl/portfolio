@@ -2,7 +2,7 @@ import axiosInstance from '@/service/axiosService';
 
 const wpApi = '/wp/v2';
 const acfApi = 'acf/v3';
-const formAPI = 'ninja-forms/v1/submit/';
+const formAPI = 'contact-form/v1/submit';
 
 export const getHeroContent = async () => {
     return await axiosInstance.get(`${wpApi}/components?slug=hero`);
@@ -48,8 +48,8 @@ export const getSocialLinks = async () => {
     return await axiosInstance.get(`/options/social-links`);
 };
 
-export const postFormSubmit = async (formId: number, data: any) => {
-    return await axiosInstance.post(`${formAPI}/${formId}`, data);
+export const postFormSubmit = async (data: any) => {
+    return await axiosInstance.post(`${formAPI}`, data);
 };
 
 export const getImprint = async () => {

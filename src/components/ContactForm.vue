@@ -1,15 +1,10 @@
 <template>
     <form
-        @submit.prevent="submitForm"
-        data-netlify="true"
-        name="contact"
-        method="POST"
+        @submit.prevent="handleSubmit"
+        name="contact-me"
         class="bg-light p-8 rounded-md shadow-card text-primary font-ptsans"
     >
         <h3 class="text-2xl mb-6 text-dark">{{ props.title }}</h3>
-
-        <!-- Hidden Netlify form name input -->
-        <input type="hidden" name="form-name" value="contact" />
 
         <div class="space-y-4">
             <div>
@@ -71,6 +66,9 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { postFormSubmit } from '@/service/apiService';
+import { RECAPTCHA_KEY } from '@/environment';
+import { load } from 'recaptcha-v3';
 
 interface FormProps {
     title: string;
@@ -94,25 +92,24 @@ const formData = ref<FormData>({
 
 const submissionStatus = ref<string | null>(null);
 
-const submitForm = async () => {
-    const formDataToSubmit = new FormData();
-    formDataToSubmit.append('form-name', 'contact');
-    formDataToSubmit.append('name', formData.value.name);
-    formDataToSubmit.append('email', formData.value.email);
-    formDataToSubmit.append('subject', formData.value.subject);
-    formDataToSubmit.append('message', formData.value.message);
+const loadRecaptchaToken = async () => {
+    const recaptcha = await load(RECAPTCHA_KEY);
+    const token = await recaptcha.execute('submit');
+    return token;
+};
 
+const handleSubmit = async () => {
     try {
-        const response = await fetch('/', {
-            method: 'POST',
-            body: formDataToSubmit,
-        });
+        const recaptchaToken = await loadRecaptchaToken();
+        const response = await postFormSubmit({ ...formData.value, recaptcha_token: recaptchaToken });
 
-        if (response.ok) {
+        const { data } = response;
+
+        if (data.success) {
             submissionStatus.value = 'success';
             resetForm();
         } else {
-            throw new Error('Network response was not ok');
+            console.log(data);
         }
     } catch (error) {
         console.error('Error submitting form:', error);
